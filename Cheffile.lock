@@ -1,0 +1,12 @@
+SITE
+  remote: http://community.opscode.com/api/v1
+  specs:
+    apt (2.7.0)
+    tar (0.6.0)
+    user (0.4.2)
+
+DEPENDENCIES
+  apt (~> 2.7.0)
+  tar (~> 0.6.0)
+  user (>= 0)
+
