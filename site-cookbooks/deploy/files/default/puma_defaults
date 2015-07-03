@@ -1,0 +1,5 @@
+export GEM_HOME=/home/deploy/.rvm/gems/jruby-1.7.19
+export GEM_PATH=/home/deploy/.rvm/gems/jruby-1.7.19:/home/deploy/.rvm/gems/jruby-1.7.19@global
+export PATH=/home/deploy/.rvm/gems/jruby-1.7.19/bin:/home/deploy/.rvm/gems/jruby-1.7.19@global/bin:/home/deploy/.rvm/rubies/jruby-1.7.19/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/deploy/.rvm/bin:/home/deploy/.rvm/bin
+export rvm_path=/home/deploy/.rvm
+export rvm_prefix=/home/deploy

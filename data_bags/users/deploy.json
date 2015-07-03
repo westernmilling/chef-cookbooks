@@ -1,0 +1,10 @@
+{
+  "id": "deploy",
+  "home": "/home/deploy",
+  "manage_home": "true",
+  "password": "insecure",
+  "action": "lock",
+  "ssh_keys": [
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDNVzHNpomHRRlDQDM8kjuswT1vrgeX/AtD2lpEqSkvK7bpos4lbulFbK/sQZMc5S7eg8phFT0GRwfYkmggmMEAwImEKOEFkQIvPIZ+BjZWdwXuRSt+6TmeQZAkvkb4rTyfCCtAE2mJXd/fL9n3iTLqcdTV3Y4yYeU1vOARMEy4vF4JuZ776H5eMSMSAmLuH+0hilJEWYo78NItvajTS0Hvnt2gzWIZySnn+brClY2rDm5AxOqhZoi9TloUK0+DpQmiLc42LNgBmw3wRL6raXfo+Na5e7hNgDCO7hWWoWtWBs1g4mNDkHVtTalyRTF+1g/+U3UgUtM6aKc9uWmssE1z josephbridgwaterrowe@Josephs-MacBook-Pro.local"
+  ]
+}

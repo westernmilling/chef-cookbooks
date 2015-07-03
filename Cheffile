@@ -1,0 +1,5 @@
+site 'http://community.opscode.com/api/v1'
+
+cookbook 'apt', '~> 2.7.0'
+cookbook 'tar', '~> 0.6.0'
+cookbook 'user'
