@@ -6,10 +6,17 @@
 #
 # All rights reserved - Do Not Redistribute
 #
-# include_recipe 'apt'
+include_recipe 'apt'
 
-apt_package 'nodejs' do
-  action :install
+packages = %w{
+  git
+  nodejs
+}
+
+packages.each do |pkg|
+  apt_package pkg do
+    action :install
+  end
 end
 
 gem_package 'bundler' do
