@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: deploy
-# Recipe:: githubgithub
+# Recipe:: github
 #
 # Copyright 2015, Joseph Bridgwater-Rowe
 #
