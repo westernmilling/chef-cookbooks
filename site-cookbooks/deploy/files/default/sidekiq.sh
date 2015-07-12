@@ -33,13 +33,15 @@ start() {
 
   status
   if [ $? -eq 1 ]; then
-
-    [ `id -u` == '0' ] || (echo "$SIDEKIQ runs as root only .."; exit 5)
     [ -d $APP_DIR ] || (echo "$APP_DIR not found!.. Exiting"; exit 6)
     cd $APP_DIR
     echo "Starting $SIDEKIQ message processor .. "
 
-    su -c "$CMD" - $AS_USER
+    if [ "$(id -un)" = "$AS_USER" ]; then
+      eval $CMD
+    else
+      su -c "$CMD" - $AS_USER
+    fi
 
     RETVAL=$?
     #Sleeping for 8 seconds for process to be precisely visible in process table - See status ()
@@ -69,6 +71,20 @@ stop() {
 
 }
 
+shutdown() {
+  status
+  if [ $? -eq 0 ]; then
+    echo "Shutting down sidekiq message processor .."
+    SIG="USR1"
+    kill -$SIG `cat $PID_FILE`
+    RETVAL=$?
+    [ $RETVAL -eq 0 ] && rm -f $LOCK_FILE
+    return $RETVAL
+  else
+    echo "Sidekiq message processor is stopped already .."
+  fi
+}
+
 status() {
 
   ps -ef | grep 'sidekiq [0-9].[0-9].[0-9]' | grep -v grep
@@ -82,6 +98,9 @@ case "$1" in
         ;;
     stop)
         stop
+        ;;
+    shutdown)
+        shutdown
         ;;
     status)
         status
