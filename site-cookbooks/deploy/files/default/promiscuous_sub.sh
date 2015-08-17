@@ -1,7 +1,7 @@
 #!/bin/bash
 # chkconfig: 345 100 75
 #
-# Description:
+# Description: This has issues with starting and stopping, need to resolve!!!
 #
 # User-specified exit parameters used in this script:
 #
@@ -19,7 +19,7 @@ LOCK_FILE="$APP_DIR/tmp/promiscuous-lock"
 PID_FILE="$APP_DIR/tmp/pids/promiscuous.pid"
 GEMFILE="$APP_DIR/Gemfile"
 PROMISCUOUS="promiscuous subscribe"
-APP_ENV="staging"
+APP_ENV="production"
 BUNDLE="bundle"
 
 START_CMD="RAILS_ENV=$APP_ENV $BUNDLE exec $PROMISCUOUS --daemonize --pid-file $PID_FILE"
@@ -33,11 +33,12 @@ start() {
 
   status
 
-  if [ $STATUS_CODE -eq 1 ]; then
+  if [ $STATUS_CODE -eq 0 ]; then
     [ -d $APP_DIR ] || (echo "$APP_DIR not found!.. Exiting"; exit 6)
     cd $APP_DIR
     echo "Starting $PROMISCUOUS processor .. "
 
+    echo "$CMD"
     if [ "$(id -un)" = "$AS_USER" ]; then
       eval $CMD
     else
@@ -106,6 +107,7 @@ case "$1" in
         ;;
     status)
         status
+echo "STATUS_CODE: $STATUS_CODE"
 
         if [ $STATUS_CODE -eq 0 ]; then
              echo "$PROMISCUOUS processor is running .."
