@@ -4,6 +4,8 @@
 #
 # Copyright 2015, Joseph Bridgwater-Rowe
 #
+# http://imagemagick.org/script/install-source.php
+#
 include_recipe 'apt'
 include_recipe 'tar'
 
