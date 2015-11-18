@@ -1,0 +1,6 @@
+files:
+  - /var/log/app/file.log
+destination:
+  host: x.com
+  port: XXXX
+  protocol: tls
