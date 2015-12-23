@@ -28,12 +28,10 @@ CMD="cd ${APP_DIR} && ${START_CMD} >> ${LOG_FILE} 2>&1 &"
 RETVAL=0
 STATUS_CODE=0
 
-
 start() {
+  local status_code=$(status)
 
-  status
-
-  if [ $STATUS_CODE -eq 1 ]; then
+  if [ $status_code -eq 0 ]; then
     [ -d $APP_DIR ] || (echo "$APP_DIR not found!.. Exiting"; exit 6)
     cd $APP_DIR
     echo "Starting $PROMISCUOUS processor .. "
@@ -52,14 +50,12 @@ start() {
   else
     echo "$PROMISCUOUS processor is already running .. "
   fi
-
-
 }
 
 stop() {
+  local status_code=$(status)
 
-  status
-  if [ $STATUS_CODE -eq 0 ]; then
+  if [ $status_code -eq 1 ]; then
     echo "Stopping $PROMISCUOUS processor .."
     SIG="INT"
     kill -$SIG `cat $PID_FILE`
@@ -69,12 +65,11 @@ stop() {
   else
     echo "$PROMISCUOUS processor is stopped already .."
   fi
-
 }
 
 shutdown() {
-  status
-  if [ $STATUS_CODE -eq 0 ]; then
+  local status_code=$(status)
+  if [ $status_code -eq 1 ]; then
     echo "Shutting down $PROMISCUOUS processor .."
     SIG="USR1"
     kill -$SIG `cat $PID_FILE`
@@ -87,12 +82,13 @@ shutdown() {
 }
 
 status() {
-
-  ps -ef | grep 'promiscuous subscribe' | grep -v grep
-  STATUS_CODE=$?
-  return $STATUS_CODE
+  local running=$(ps -ef | grep 'promiscuous subscribe' | grep -v grep)
+  if [ -z "$running" ]; then
+    echo "0"
+  else
+    echo "1"
+  fi
 }
-
 
 case "$1" in
     start)
@@ -105,9 +101,8 @@ case "$1" in
         shutdown
         ;;
     status)
-        status
-
-        if [ $STATUS_CODE -eq 0 ]; then
+        status_code=$(status)
+        if [ $status_code -eq 1 ]; then
              echo "$PROMISCUOUS processor is running .."
              RETVAL=0
          else

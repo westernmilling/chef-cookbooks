@@ -1,25 +1,18 @@
 #
-# Cookbook Name:: deploy
-# Recipe:: sidekiq
+# Cookbook Name:: hutch
+# Recipe:: hutch
 #
 # Copyright 2015, Joseph Bridgwater-Rowe
 #
 # All rights reserved - Do Not Redistribute
 #
 
-cookbook_file 'sidekiq_workers.conf' do
+cookbook_file 'hutch.conf' do
   action :create
-  path '/etc/init/sidekiq_workers.conf'
-  # mode '0755'
+  path '/etc/init/hutch.conf'
 end
 
-cookbook_file 'sidekiq.conf' do
-  action :create
-  path '/etc/init/sidekiq.conf'
-  # mode '0755'
-end
-
-service 'sidekiq_workers' do
+service 'hutch' do
   action [:enable, :start]
   provider Chef::Provider::Service::Upstart
   supports :restart => true,
