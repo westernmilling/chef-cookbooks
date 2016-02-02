@@ -36,32 +36,32 @@ packages.each do |pkg|
 end
 
 remote_file "ruby-source" do
-  source 'http://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.2.tar.gz'
-  path '/tmp/ruby-2.2.2.tar.gz'
+  source 'http://cache.ruby-lang.org/pub/ruby/2.3/ruby-2.3.0.tar.gz'
+  path '/tmp/ruby-2.3.0.tar.gz'
   action :create
 end
 
 # tar_extract 'http://cache.ruby-lang.org/pub/ruby/2.1/ruby-2.2.1.tar.gz' do
-tar_extract '/tmp/ruby-2.2.2.tar.gz' do
+tar_extract '/tmp/ruby-2.3.0.tar.gz' do
   action :extract_local
   target_dir '/usr/src'
-  creates '/usr/src/ruby-2.2.2'
+  creates '/usr/src/ruby-2.3.0'
 end
 
 execute './configure CONFIGURE_OPTS=-fPIC' do
   action :run
-  cwd '/usr/src/ruby-2.2.2'
-  creates '/usr/src/ruby-2.2.2/config.status'
+  cwd '/usr/src/ruby-2.3.0'
+  creates '/usr/src/ruby-2.3.0/config.status'
 end
 
 execute 'make' do
   action :run
-  cwd '/usr/src/ruby-2.2.2'
-  creates '/usr/src/ruby-2.2.2/ruby'
+  cwd '/usr/src/ruby-2.3.0'
+  creates '/usr/src/ruby-2.3.0/ruby'
 end
 
 execute 'make install' do
   action :run
-  cwd '/usr/src/ruby-2.2.2'
+  cwd '/usr/src/ruby-2.3.0'
   creates '/usr/local/bin/ruby'
 end

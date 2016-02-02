@@ -10,7 +10,6 @@ include_recipe 'apt'
 
 packages = %w{
   git
-  nodejs
 }
 
 packages.each do |pkg|
